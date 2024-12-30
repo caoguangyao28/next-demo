@@ -2,9 +2,9 @@
 import Link from 'next/link';
 import {usePathname} from "next/navigation";
 const linkData = [
-  {name: 'Performance', href: '/performance'},
-  {name: 'Reliability', href: '/reliability'},
-  {name: 'Scale', href: '/scale'},
+  {name: '前沿观察', href: '/performance'},
+  {name: '技术', href: '/reliability'},
+  {name: '关于我', href: '/scale'},
 ]
 export default function Header() {
   // 匹配路径高亮
