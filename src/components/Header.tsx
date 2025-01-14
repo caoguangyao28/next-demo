@@ -5,8 +5,8 @@ import Image from "next/image";
 import LogoSrc from '/public/my-logo.svg';
 const linkData = [
   {name: '前沿观察', href: '/performance'},
-  {name: '技术', href: '/reliability'},
-  {name: 'scale', href: '/scale'},
+  {name: 'blogs', href: '/blogs'},
+  // {name: 'scale', href: '/scale'},
   {name: '关于我', href: '/about'}
 ]
 export default function Header() {
