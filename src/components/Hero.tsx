@@ -15,7 +15,7 @@ export default function Hero(props: IProps){
     <div className='h-screen relative'>
       {/*图片层级 大小 定位*/}
       <div className='absolute inset-0 -z-10'>
-        <Image className={'object-cover'} src={props.imgUrl} fill  alt={props.altTxt}/>
+        {/*<Image className={'object-cover'} src={props.imgUrl} fill  alt={props.altTxt}/>*/}
         {/*渐变遮罩*/}
         <div className='absolute inset-0 bg-gradient-to-r from-gray-950'></div>
       </div>
