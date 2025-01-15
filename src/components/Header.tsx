@@ -5,8 +5,8 @@ import Image from "next/image";
 import LogoSrc from '/public/my-logo.svg';
 const linkData = [
   {name: '前沿观察', href: '/performance'},
-  {name: '技术', href: '/reliability'},
-  {name: 'scale', href: '/scale'},
+  {name: 'blogs', href: '/blogs'},
+  // {name: 'scale', href: '/scale'},
   {name: '关于我', href: '/about'}
 ]
 export default function Header() {
@@ -14,10 +14,10 @@ export default function Header() {
   const pathname = usePathname();
 
   return (
-    <div className= 'absolute w-full z-10'>
-      <header className={'container flex items-center justify-between text-white mx-auto p-8'}>
-        <Link className={'flex items-center justify-center w-[4.5rem] h-[4.5rem] bg-amber-100 rounded-2xl'} href="/">
-          <Image className={'w-[60px]'} src={LogoSrc} alt={'logo'} />
+    <div className= 'fixed w-full z-10'>
+      <header className={'container flex items-center justify-between text-white mx-auto pl-3 pr-3 pt-5 pb-5'}>
+        <Link className={'flex items-center justify-center w-[50px] h-[50px] bg-amber-100 rounded-2xl'} href="/">
+          <Image className={'w-[40px]'} src={LogoSrc} alt={'logo'} />
         </Link>
         <div className={'text-xl space-x-4 '}>
           {linkData.map((item, index) => (
