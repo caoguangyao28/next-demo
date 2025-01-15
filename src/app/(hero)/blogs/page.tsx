@@ -1,5 +1,5 @@
 import Link from "next/link";
-import {Metadata} from "next";
+import { getSortedPostsData } from '@/app/lib/post'
 
 export default async function Page() {
   const staticData = await generateStaticProps();
@@ -14,7 +14,7 @@ export default async function Page() {
               </Link>
             </h1>
             <p className="text-gray-700">
-              {blog.content}
+              {blog.date}
             </p>
           </div>
         ))}
@@ -22,32 +22,17 @@ export default async function Page() {
   )
 }
 
+// 获取所有博文 列表
 export const metadata: Metadata = {
   description: "Blogs list page",
   title: "Blogs list"
 }
 
 async function generateStaticProps() {
+  const data = await getSortedPostsData();
   return {
     props: {
-      blogs: [
-        {
-          id: 1,
-          title: 'blog 1',
-          slug: 'blog-1',
-          content: 'blog 1 content',
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          id: 2,
-          title: 'blog 2',
-          slug: 'blog-2',
-          content: 'blog 2 content',
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        }
-      ]
+      blogs: data
     }
   }
 }
