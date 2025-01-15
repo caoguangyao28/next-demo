@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getSortedPostsData } from '@/app/lib/post'
+import {Metadata} from "next";
 
 export default async function Page() {
   const staticData = await generateStaticProps();
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
 }
 
 async function generateStaticProps() {
-  const data = await getSortedPostsData();
+  const data =  getSortedPostsData();
   return {
     props: {
       blogs: data
