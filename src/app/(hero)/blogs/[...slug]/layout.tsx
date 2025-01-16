@@ -1,3 +1,5 @@
+import BreadCrumb from '@/components/BreadCrumb'
+
 export default function BlogsLayout({
     children
 }: Readonly<{
@@ -5,6 +7,7 @@ export default function BlogsLayout({
 }>) {
   return (
     <div className={'container mx-auto pt-[130px] h-full flex gap-2 '}>
+      <BreadCrumb />
       <section className={"w-[300px] h-[500px] bg-amber-100 rounded-2xl bg-opacity-35 flex flex-col items-center"}>
         <h2>logo 最新文章推荐</h2>
       </section>

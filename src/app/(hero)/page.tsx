@@ -10,6 +10,6 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <Hero imgUrl={homeSrc} altTxt={"home"} content={"Professional Cloud Hosting"} />
+    <Hero imgUrl={homeSrc} altTxt={"home"} content={"My blogs home is building"} />
   );
 }
