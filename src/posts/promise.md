@@ -1,6 +1,7 @@
 ---
 title: '自己实现Promise MyPromise'
 date: '2024-08-01'
+description: '按照ES6 promise 规范，兼容promise+ 规范,实现MyPromise'
 ---
 ## 什么是Promise
 

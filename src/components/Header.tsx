@@ -24,7 +24,7 @@ export default function Header() {
             <Link
               key={index}
               href={item.href}
-              className={`${item.href === pathname ? 'text-purple-700' : ''}`}
+              className={`${pathname.includes(item.href) ? 'text-purple-700' : ''}`}
             >
               {item.name}
             </Link>

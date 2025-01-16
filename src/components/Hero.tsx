@@ -3,6 +3,7 @@
  *
  */
 import Image, {StaticImageData} from 'next/image'
+// import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 
 interface IProps {
   imgUrl: StaticImageData;
@@ -18,6 +19,12 @@ export default function Hero(props: IProps){
         {/*<Image className={'object-cover'} src={props.imgUrl} fill  alt={props.altTxt}/>*/}
         {/*渐变遮罩*/}
         <div className='absolute inset-0 bg-gradient-to-r from-gray-950'></div>
+        {/*<div>*/}
+        {/*  <Avatar>*/}
+        {/*    <AvatarImage src="https://github.com/shadcn.png" />*/}
+        {/*    <AvatarFallback>CN</AvatarFallback>*/}
+        {/*  </Avatar>*/}
+        {/*</div>*/}
       </div>
       <div className='flex justify-center pt-48'>
         <h1 className='text-white text-6xl'>{props.content}</h1>

@@ -15,6 +15,9 @@ export default async function Page() {
               </Link>
             </h1>
             <p className="text-gray-700">
+              {blog.description}
+            </p>
+            <p className="text-gray-700">
               {blog.date}
             </p>
           </div>
@@ -30,7 +33,7 @@ export const metadata: Metadata = {
 }
 
 async function generateStaticProps() {
-  const data =  getSortedPostsData();
+  const data = await getSortedPostsData();
   return {
     props: {
       blogs: data
