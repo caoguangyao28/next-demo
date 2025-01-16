@@ -12,7 +12,7 @@ export default function BlogsLayout({
           <AvatarImage src={avatroSrc.src} />
           <AvatarFallback>CGY</AvatarFallback>
         </Avatar>
-        <ul className="space-y-4 text-gray-700 pl-0">
+        <ul className="space-y-4 pl-0">
           <li>姓名：曹光耀</li>
           <li>性别：男</li>
           <li>出生日期：1989年1月6日</li>
