@@ -56,6 +56,9 @@ async function readFilesRecursively(dir: string): Promise<string[]> {
   return filePaths;
 }
 
+// 引入 allPostsData 缓存对象
+const allPostsDataCache: { [key: string]: PostData[] } = {};
+
 /**
  * 获取排序后的帖子数据
  * 该函数异步读取帖子目录下的所有Markdown文件，解析文件内容，提取元数据，并根据日期对帖子进行排序
@@ -63,9 +66,12 @@ async function readFilesRecursively(dir: string): Promise<string[]> {
  * @returns {Promise<PostData[]>} 返回一个Promise，解析为PostData对象的数组
  */
 export async function getSortedPostsData() : Promise<PostData[]> {
+  // 检查缓存中是否已经存在 allPostsData
+  if (allPostsDataCache['allPostsData']) {
+    return allPostsDataCache['allPostsData'];
+  }
   // 递归读取帖子目录下的所有文件路径
   const filePaths = await readFilesRecursively(postsDirectory);
-
   // 读取文件夹下所有md文件，包含子文件夹
   const allPostsData: PostData[] = await Promise.all(filePaths.map(async (filePath) => {
     // 从文件名中移除".md"以获取id
@@ -75,7 +81,6 @@ export async function getSortedPostsData() : Promise<PostData[]> {
 
     // 读取Markdown文件内容为字符串
     const fileContents = await fs.promises.readFile(filePath, 'utf8');
-
     // 使用gray-matter解析帖子的元数据部分
     const matterResult = matter(fileContents);
     // 组合数据与id
@@ -85,17 +90,20 @@ export async function getSortedPostsData() : Promise<PostData[]> {
       ...matterResult.data
     } as PostData;
   }));
+
   // 对帖子按日期进行排序
-  return allPostsData.sort((a, b) => {
+  const sortedPostsData = allPostsData.sort((a, b) => {
     if (a.date < b.date) {
       return 1
     } else {
       return -1
     }
-  })
+  });
+  // 将结果存储到缓存中
+  allPostsDataCache['allPostsData'] = sortedPostsData;
+
+  return sortedPostsData;
 }
-
-
 // 需要考虑嵌套子目录情况 slug 需要注意
 export async function getAllPostIds() {
   // const fileNames = fs.readdirSync(postsDirectory)
