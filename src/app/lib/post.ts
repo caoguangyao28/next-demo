@@ -4,11 +4,13 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import { remark } from 'remark'
+import {remark} from 'remark'
 import html from 'remark-html'
-import { rehype } from 'rehype'
+import {rehype} from 'rehype'
 import rehypePrism from 'rehype-prism-plus';
-
+// 引入缓存对象
+const fileCache: { [key: string]: any } = {};
+let filePathsCache: string[] | PromiseLike<string[]> | null = null;
 const postsDirectory = path.join(process.cwd(), 'src/posts')
 type PostData = {
   id: string
@@ -27,6 +29,9 @@ type PostData = {
  * @returns {Promise<string[]>} - 返回一个Promise，解析为所有.md文件的路径数组
  */
 async function readFilesRecursively(dir: string): Promise<string[]> {
+  if(filePathsCache !== null){
+    return filePathsCache;
+  }
   // 读取目录内容，包括文件和子目录，并将它们作为文件描述符数组返回
   const files = await fs.promises.readdir(dir, { withFileTypes: true });
   // 初始化一个空数组，用于存储所有.md文件的路径
@@ -46,6 +51,7 @@ async function readFilesRecursively(dir: string): Promise<string[]> {
     }
   }
 
+  filePathsCache = filePaths;
   // 返回所有.md文件的路径数组
   return filePaths;
 }
@@ -121,6 +127,9 @@ export async function getAllPostIds() {
 
 type PostDataWithContent = PostData & { contentHtml: string }
 export async function getPostData(id: string) : Promise<PostDataWithContent> {
+  if (fileCache[id]) {
+    return fileCache[id]
+  }
   const fullPath = path.join(postsDirectory, `${id}.md`)
   // console.log(fullPath, '读取md文件路径')
   const fileContents = fs.readFileSync(fullPath, 'utf-8')
@@ -135,9 +144,9 @@ export async function getPostData(id: string) : Promise<PostDataWithContent> {
   const highlightHtml = await rehype().use(rehypePrism).process(processedContent.toString())
   const contentHtml = highlightHtml.toString()
   // console.log(contentHtml);
-  return {
+  return fileCache[id] = {
     id,
     contentHtml,
     ...matterResult.data
-  } as PostDataWithContent
+  } as PostDataWithContent;
 }
