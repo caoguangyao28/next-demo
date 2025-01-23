@@ -1,18 +1,10 @@
-'use client'
 import Link from 'next/link';
-import {usePathname} from "next/navigation";
 import Image from "next/image";
 import LogoSrc from '/public/my-logo.svg';
-const linkData = [
-  {name: '前沿观察', href: '/performance'},
-  {name: 'blogs', href: '/blogs'},
-  // {name: 'scale', href: '/scale'},
-  {name: '关于我', href: '/about'}
-]
+import StaticNav from '@/components/StaticNav'
+import Nav from "@/components/navigation/nav";
 export default function Header() {
   // 匹配路径高亮
-  const pathname = usePathname();
-
   return (
     <div className= 'fixed w-full z-10'>
       <header className={'container flex items-center justify-between text-white mx-auto pl-3 pr-3 pt-5 pb-5'}>
@@ -22,16 +14,10 @@ export default function Header() {
           </Link>
           <span className={'text-3xl'}> Shinecgy coding</span>
         </div>
-        <div className={'text-xl space-x-4 '}>
-          {linkData.map((item, index) => (
-            <Link
-              key={index}
-              href={item.href}
-              className={`${pathname.includes(item.href) ? 'text-purple-700' : ''}`}
-            >
-              {item.name}
-            </Link>
-          ))}
+        {/* 提炼为客户的组件部分*/}
+        <div className={'flex items-center pr-3'}>
+          <StaticNav />
+          <Nav />
         </div>
       </header>
     </div>

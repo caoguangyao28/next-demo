@@ -1,14 +1,23 @@
-import { getUsers } from '@/server/actions/get-users'
-
-
-export default async function UserInfo() {
-  const users = await getUsers();
+import { auth } from '@/server/auth'
+import Image from "next/image";
+import type { Session } from 'next-auth';
+export default function UserInfo() {
+  console.log(process.env.POSTGRES_URL);
+  // const session: Session | null = await auth();
+  // const users = session?.user;
+  // if (!users) {
+  //   return <div>加载中...</div>; // 或者其他合适的占位内容
+  // }
   return (
-    <div className={'flex flex-col items-center'}>
-      <div className={'w-[100px] h-[100px] rounded-full bg-amber-100'}>
-        { users.sucess && <span> { users.data[0].name } </span> }
-      </div>
-      <div className={'text-center'}></div>
-    </div>
+    <nav>
+      <ul>
+        <li>logo</li>
+        {/*<li>{users?.name}</li>*/}
+        {/*<li>{users?.email}</li>*/}
+        <li>
+          {/*<Image width={50} src={users?.image || ''} alt={'avatar'} />*/}
+        </li>
+      </ul>
+    </nav>
   )
 }

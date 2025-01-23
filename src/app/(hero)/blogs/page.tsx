@@ -22,13 +22,13 @@ export default async function Page() {
   // console.log( groupedBlogs, sortedGroups);
 
   return (
-    <div className={'absolute inset-0 flex items-center justify-around flex-wrap p-4'}>
+    <div className={'absolute inset-0 top-[70px] flex items-center justify-around flex-wrap p-4 overflow-y-auto'}>
       {sortedGroups.map((group) => (
         <div key={group} className="container">
           <h2 className="text-3xl font-bold mb-4">{group === 'undefined' ? '' : group}</h2>
-          <div className="flex justify-items-center flex-wrap">
+          <div className="flex justify-evenly flex-wrap ">
             {groupedBlogs[group].map((blog) => (
-              <div key={blog.id} className="bg-white rounded-lg shadow-md p-4 m-2  sm:w-1/2 md:w-1/3 max-w-md hover:shadow-lg transition-shadow duration-300">
+              <div key={blog.id} className="bg-white p-4 rounded-lg shadow-md sm:w-5/12 md:w-[30%] hover:shadow-lg transition-shadow duration-300">
                 <h1 className="text-2xl font-bold mb-2">
                   <Link href={`/blogs/${blog.id}`} className="text-blue-600 hover:text-blue-800">
                     {blog.title}

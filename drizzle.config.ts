@@ -6,7 +6,7 @@ config({
 });
 
 // 调试输出环境变量
-console.log("POSTGRES_URL:", process.env.POSTGRES_URL);
+// console.log("POSTGRES_URL:", process.env.POSTGRES_URL);
 
 export default defineConfig({
   schema: "./src/server/schema.ts",
