@@ -1,7 +1,15 @@
-export default function LoginForm() {
+import AuthCard from "@/components/auth/AuthCard";
+export const LoginForm = () => {
   return (
+    <AuthCard
+      cardTile={'Welcome to blogs'}
+      backButtonHref={'/auth/register'}
+      backButtonLable={'create a new account'}
+      showSocials
+    >
     <div>
-      <h1>Login Form</h1>
+      form zhu
     </div>
-  );
+    </AuthCard>
+  )
 }

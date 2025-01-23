@@ -1,13 +1,39 @@
+import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
+import Socials from "@/components/auth/Socials";
+import BackButton from "@/components/auth/BackButton";
 
-export default function AuthCard() {
+
+type CardWrapperProps = {
+  children: React.ReactNode;
+  cardTile: string;
+  backButtonHref: string;
+  backButtonLable: string;
+  showSocials?: boolean;
+};
+
+export default function AuthCard({
+  children,
+  cardTile,
+  backButtonHref,
+  backButtonLable,
+  showSocials,
+}: CardWrapperProps) {
   return (
-    <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
-      <div className="flex flex-col space-y-2 text-center">
-        <h1 className="text-2xl font-semibold tracking-tight">
-          Create an account
-        </h1>
-
-      </div>
-    </div>
+    <Card className={'w-1/2'}>
+      <CardHeader>
+        <CardTitle>{cardTile}</CardTitle>
+      </CardHeader>
+      <CardContent>
+        {children}
+      </CardContent>
+      {showSocials && (
+        <CardFooter>
+          <Socials />
+        </CardFooter>
+      )}
+      <CardFooter>
+        <BackButton href={backButtonHref} label={backButtonLable} />
+      </CardFooter>
+    </Card>
   )
 }

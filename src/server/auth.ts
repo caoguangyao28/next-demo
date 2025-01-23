@@ -13,6 +13,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     Github({
       clientId: process.env.GITHUB_ID!,
       clientSecret: process.env.GITHUB_SECRET!,
+      allowDangerousEmailAccountLinking: true
     })
   ],
 })

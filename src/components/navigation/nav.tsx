@@ -8,8 +8,8 @@ export default async function Nav() {
   const session = await auth()
   return (
    !session ? (
-     <Button asChild={true}>
-      <Link className={'flex gap-2'} href="/src/app/(hero)/auth/login">
+     <Button className={'ml-2'} variant={'ghost'} size={'sm'} asChild={true}>
+      <Link className={'flex gap-2'} href="/auth/login">
         <LogIn size={16} /><span>Login</span>
       </Link>
      </Button>
