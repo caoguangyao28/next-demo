@@ -9,14 +9,12 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   const postData = await getPostData(slugStr);
 
   return (
-    <div className={'w-full flex items-center justify-center'}>
-      <article>
-        <h1 className={'text-2xl'}>{postData.title}</h1>
-        <div className={'text-sm'}>
-          <span>{postData.date}</span>
-        </div>
-        <div className={'pt-2.5'} dangerouslySetInnerHTML={{__html: postData.contentHtml}}/>
-      </article>
+    <div className={''}>
+      <h1 className={'text-2xl'}>{postData.title}</h1>
+      <div className={'text-sm'}>
+        <span>{postData.date}</span>
+      </div>
+      <div className={'pt-2.5'} dangerouslySetInnerHTML={{__html: postData.contentHtml}}/>
     </div>
   )
 }
