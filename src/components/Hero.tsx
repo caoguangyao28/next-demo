@@ -2,32 +2,28 @@
  * 标题 背景图 组件
  *
  */
-import Image, {StaticImageData} from 'next/image'
-import Link from "next/link";
-// import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
+import CategoryCard from "@/components/CategoryCard";
+import { categories } from "@/app/lib/staticData"
 
 interface IProps {
-  imgUrl: StaticImageData;
-  altTxt: string;
-  content: string;
+  title: string;
 }
 
-export default function Hero(props: IProps){
+export default function Hero({ title }: IProps) {
+
   return (
     <div className='h-screen relative'>
-      {/*图片层级 大小 定位*/}
-      <div className='absolute inset-0 -z-10'>
-        {/*<Image className={'object-cover'} src={props.imgUrl} fill  alt={props.altTxt}/>*/}
-        {/*渐变遮罩*/}
+      <div className='absolute inset-0 -z-10 dark:bg-gray-900'>
         <div className='absolute inset-0 bg-gradient-to-r from-gray-950'></div>
       </div>
       <div className='flex justify-center pt-48'>
-        <h1 className='text-white text-6xl'>{props.content}</h1>
+        <h1 className='text-purple-700 dark:text-white text-6xl'>{ title }</h1>
       </div>
-      <div className='flex w-[265px] mx-auto flex-wrap justify-center text-white text-3xl'>
-        <Link className={'w-full'} href={'/blogs'}>blogs 可以点击查看</Link>
-        <Link className={'w-full'} href={'/about'}>about 可以点击查看</Link>
+      <div className='flex w-full mx-auto flex-wrap justify-center gap-4 mt-12'>
+        {categories.map((category, index) => (
+          <CategoryCard key={index} title={category.title} description={category.description} latestPosts={category.latestPosts} />
+        ))}
       </div>
     </div>
-  )
+  );
 }

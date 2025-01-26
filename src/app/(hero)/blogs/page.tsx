@@ -18,15 +18,12 @@ export default async function Page() {
 
   // 将分组值为 undefined 的博客放在其他分组前面
   const sortedGroups = Object.keys(groupedBlogs).sort((a, b) => a === 'undefined' ? -1 : b === 'undefined' ? 1 : 0);
-
-  // console.log( groupedBlogs, sortedGroups);
-
   return (
     <div className={'absolute inset-0 top-[70px] flex items-center justify-around flex-wrap p-4 overflow-y-auto'}>
       {sortedGroups.map((group) => (
         <div key={group} className="container">
           <h2 className="text-3xl font-bold mb-4">{group === 'undefined' ? '' : group}</h2>
-          <div className="flex justify-evenly flex-wrap ">
+          <div className="flex justify-between gap-5 flex-wrap ">
             {groupedBlogs[group].map((blog) => (
               <div key={blog.id} className="bg-white p-4 rounded-lg shadow-md sm:w-5/12 md:w-[30%] hover:shadow-lg transition-shadow duration-300">
                 <h1 className="text-2xl font-bold mb-2">
@@ -34,10 +31,10 @@ export default async function Page() {
                     {blog.title}
                   </Link>
                 </h1>
-                <p className="text-gray-700">
+                <p className="text-gray-700 m-0">
                   {blog.description}
                 </p>
-                <p className="text-gray-700">
+                <p className="text-gray-700 mb-0">
                   {blog.date}
                 </p>
               </div>

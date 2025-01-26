@@ -1,13 +1,8 @@
 'use client'
 import Link from "next/link";
 import {usePathname} from "next/navigation";
+import { linkData } from "@/app/lib/staticData"
 
-const linkData = [
-  {name: '前沿观察', href: '/performance'},
-  {name: 'blogs', href: '/blogs'},
-  // {name: 'scale', href: '/scale'},
-  {name: '关于我', href: '/about'}
-]
 export default function StaticNav() {
   const pathname = usePathname();
 

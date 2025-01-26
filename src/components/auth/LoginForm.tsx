@@ -5,7 +5,7 @@ export const LoginForm = () => {
       cardTile={'Welcome to blogs'}
       backButtonHref={'/auth/register'}
       backButtonLable={'create a new account'}
-      showSocials
+      showSocials = {true}
     >
     <div>
       form zhu
