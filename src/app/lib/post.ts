@@ -29,9 +29,6 @@ type PostData = {
  * @returns {Promise<string[]>} - 返回一个Promise，解析为所有.md文件的路径数组
  */
 async function readFilesRecursively(dir: string): Promise<string[]> {
-  if(filePathsCache !== null){
-    return filePathsCache;
-  }
   // 读取目录内容，包括文件和子目录，并将它们作为文件描述符数组返回
   const files = await fs.promises.readdir(dir, { withFileTypes: true });
   // 初始化一个空数组，用于存储所有.md文件的路径
@@ -52,7 +49,17 @@ async function readFilesRecursively(dir: string): Promise<string[]> {
   }
 
   filePathsCache = filePaths;
+  console.log(filePathsCache, '缓存数组');
   // 返回所有.md文件的路径数组
+  return filePaths;
+}
+
+async function getAllFilePaths() {
+  if (filePathsCache) {
+    return filePathsCache;
+  }
+  const filePaths = await readFilesRecursively(postsDirectory);
+  filePathsCache = filePaths;
   return filePaths;
 }
 
@@ -67,11 +74,14 @@ const allPostsDataCache: { [key: string]: PostData[] } = {};
  */
 export async function getSortedPostsData() : Promise<PostData[]> {
   // 检查缓存中是否已经存在 allPostsData
+  // console.log(allPostsDataCache['allPostsData']);
   if (allPostsDataCache['allPostsData']) {
     return allPostsDataCache['allPostsData'];
   }
   // 递归读取帖子目录下的所有文件路径
-  const filePaths = await readFilesRecursively(postsDirectory);
+  const filePaths = await getAllFilePaths();
+
+  console.log(filePaths, 'filePaths-所有');
   // 读取文件夹下所有md文件，包含子文件夹
   const allPostsData: PostData[] = await Promise.all(filePaths.map(async (filePath) => {
     // 从文件名中移除".md"以获取id
@@ -91,6 +101,7 @@ export async function getSortedPostsData() : Promise<PostData[]> {
     } as PostData;
   }));
 
+  // console.log(allPostsData, '所有的posts 数据')
   // 对帖子按日期进行排序
   const sortedPostsData = allPostsData.sort((a, b) => {
     if (a.date < b.date) {
@@ -107,7 +118,7 @@ export async function getSortedPostsData() : Promise<PostData[]> {
 // 需要考虑嵌套子目录情况 slug 需要注意
 export async function getAllPostIds() {
   // const fileNames = fs.readdirSync(postsDirectory)
-  const filePaths = await readFilesRecursively(postsDirectory);
+  const filePaths = await getAllFilePaths();
   const newslugs = filePaths.map(filePath => {
     // console.log()
     return {

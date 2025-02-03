@@ -18,6 +18,7 @@ export default async function Page() {
 
   // 将分组值为 undefined 的博客放在其他分组前面
   const sortedGroups = Object.keys(groupedBlogs).sort((a, b) => a === 'undefined' ? -1 : b === 'undefined' ? 1 : 0);
+  console.log(sortedGroups, '分组后的分组名');
   return (
     <div className={'absolute inset-0 top-[70px] flex items-center justify-around flex-wrap p-4 overflow-y-auto'}>
       {sortedGroups.map((group) => (
