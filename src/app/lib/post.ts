@@ -47,9 +47,6 @@ async function readFilesRecursively(dir: string): Promise<string[]> {
       filePaths.push(filePath);
     }
   }
-
-  filePathsCache = filePaths;
-  console.log(filePathsCache, '缓存数组');
   // 返回所有.md文件的路径数组
   return filePaths;
 }
