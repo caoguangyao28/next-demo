@@ -8,7 +8,7 @@ import { getLatestPosts } from "@/app/lib/post";
 
 interface IProps {
   title: string;
-  categoriesWithPosts: typeof categories;
+  categoriesWithPosts?: typeof categories;
 }
 
 
