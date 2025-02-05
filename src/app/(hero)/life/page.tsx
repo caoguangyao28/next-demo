@@ -1,10 +1,9 @@
 import Link from "next/link";
 import { getSortedPostsData } from '@/app/lib/post'
 import {Metadata} from "next";
-import { Book } from 'lucide-react'
 
 export default async function Page() {
-  const staticData = await generateStaticProps();
+  const staticData = await generateStaticProps('life');
   const { blogs } = staticData.props;
 
   // 根据 dirName 对 blogs 进行分组
@@ -27,13 +26,10 @@ export default async function Page() {
           <div className="flex justify-between gap-5 flex-wrap ">
             {groupedBlogs[group].map((blog) => (
               <div key={blog.id} className="bg-white p-4 rounded-lg shadow-md sm:w-5/12 md:w-[30%] hover:shadow-lg transition-shadow duration-300">
-                <h1 className="text-2xl font-bold mb-2 flex items-center">
-                  <Book  size={20} className="mr-2 flex-shrink-0" />
-                  <span className="overflow-hidden whitespace-nowrap text-ellipsis">
-                    <Link href={`/blogs/${blog.id}`} className="text-blue-600 hover:text-blue-800">
-                      {blog.title}
-                    </Link>
-                  </span>
+                <h1 className="text-2xl font-bold mb-2">
+                  <Link href={`/life/${blog.id}`} className="text-blue-600 hover:text-blue-800">
+                    {blog.title}
+                  </Link>
                 </h1>
                 <p className="text-gray-700 m-0">
                   {blog.description}
@@ -50,14 +46,14 @@ export default async function Page() {
   )
 }
 
-// 获取所有博文 列表
+// 获取所有生活日志 列表
 export const metadata: Metadata = {
-  description: "Blogs list page",
-  title: "Blogs list"
+  description: "Life logs list page",
+  title: "Life logs list"
 }
 
-// 只是生成技术目录下的
-async function generateStaticProps(dir: string = 'posts') {
+// 只是生成生活日志目录下的
+async function generateStaticProps(dir: string = 'life') {
   const data = await getSortedPostsData(dir);
   return {
     props: {

@@ -1,12 +1,12 @@
-import {Metadata} from "next";
 import { getAllPostIds, getPostData } from '@/app/lib/post'
-
+import {Metadata} from "next";
+import BookCover from '@/components/books/BookCover'
 export default async function Page({ params }: { params: { slug: string[] } }) {
   const { slug } = params;
   const slugStr = slug.join('/');
   // 根据slug 获取 数据
   // console.log(slug, 'slug 路径');
-  const postData = await getPostData(slugStr, 'posts');
+  const postData = await getPostData(slugStr, 'books');
 
   return (
     <div className={''}>
@@ -14,6 +14,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
       <div className={'text-sm'}>
         <span>{postData.date}</span>
       </div>
+      <BookCover desc = {postData.description} imgSrc = {postData.bookimage?? ''} />
       <div className={'pt-2.5'} dangerouslySetInnerHTML={{__html: postData.contentHtml}}/>
     </div>
   )
@@ -25,8 +26,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
  * @description 根据博文路径生成静态路径
  */
 export async function generateStaticParams(): Promise<{ slug: string[] }[]> {
-  const data = await getAllPostIds('posts');
-  // console.log(data, '全部博文路径 slug');
+  const data = await getAllPostIds('books');
   return data.map(({slug}) => ({ slug: Array.isArray(slug) ? slug : [slug] }));
 }
 
@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
   const { slug } = params;
   const slugStr = slug.join('/');
   return {
-    title: `blog ${slugStr}`,
-    description: `blog ${slugStr} detail`,
+    title: `book ${slugStr}`,
+    description: `books reading ${slugStr} detail`,
   };
 }

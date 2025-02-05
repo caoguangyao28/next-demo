@@ -2,8 +2,8 @@ import { PostData } from './post'
 
 export const linkData = [
   {name: '技术·研究', href: '/blogs'},
-  {name: '读书·笔记', href: '/articles'},
-  {name: '生活·随笔', href: '/notes'},
+  {name: '读书·笔记', href: '/books'},
+  {name: '生活·随笔', href: '/life'},
   {name: '关于我', href: '/about'}
 ]
 

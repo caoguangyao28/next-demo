@@ -44,6 +44,7 @@ export type PostData = {
   title: string
   description: string
   dirName: string
+  bookimage?: string
 }
 
 /**
@@ -103,7 +104,7 @@ export async function getSortedPostsData(type :  string) : Promise<PostData[]> {
   }
   // 递归读取帖子目录下的所有文件路径
   const filePaths = await getAllFilePaths(dirName);
-  console.log(filePaths, 'dirName 下的 所有');
+  // console.log(filePaths, `${dirName} 下所有的文件`);
   // 读取文件夹下所有md文件，包含子文件夹
   const allPostsData: PostData[] = await Promise.all(filePaths.map(async (filePath) => {
     // 从文件名中移除".md"以获取id
@@ -143,12 +144,11 @@ export async function getAllPostIds(type: string) {
   const dirName = getPostsDirectory(type);
   const filePaths = await getAllFilePaths(dirName);
   const newslugs = filePaths.map(filePath => {
-    // console.log()
     return {
-      slug: filePath.split('posts/')[1]
+      slug: filePath.split(`${type}/`)[1]
     };
   });
-  // console.log(newslugs)
+  // debugger;
   return newslugs.map(({slug}) => {
     if(slug.includes('/')){
       return {
@@ -168,12 +168,12 @@ export async function getAllPostIds(type: string) {
  */
 
 type PostDataWithContent = PostData & { contentHtml: string }
-export async function getPostData(id: string) : Promise<PostDataWithContent> {
+export async function getPostData(id: string, postsDirectory: string) : Promise<PostDataWithContent> {
   if (fileCache[id]) {
     return fileCache[id]
   }
-  const fullPath = path.join(postsDirectory, `${id}.md`)
-  // console.log(fullPath, '读取md文件路径')
+  const dirName = getPostsDirectory(postsDirectory)
+  const fullPath = path.join(dirName, `${id}.md`)
   const fileContents = fs.readFileSync(fullPath, 'utf-8')
 
   const matterResult = matter(fileContents)
@@ -185,7 +185,6 @@ export async function getPostData(id: string) : Promise<PostDataWithContent> {
   // 将html中 pre code部分 转换位高亮显示
   const highlightHtml = await rehype().use(rehypePrism).process(processedContent.toString())
   const contentHtml = highlightHtml.toString()
-  // console.log(contentHtml);
   return fileCache[id] = {
     id,
     contentHtml,

@@ -10,7 +10,7 @@ description: '按照ES6 promise 规范，兼容promise+ 规范,实现MyPromise'
 
 promise A+ 规范，明间社区规范，带有 then 方法的对象，[链接地址](https://promisesaplus.com/)。
 ES6 promise 规范，new Promise() 创建的promise 对象是符合 promise A+ 规范的对象，同时追加了一些 拓展方法，例如 catch finaly 静态方法  ··· 。[mdn 地址](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise)
-#### 自己实现
+#### 手撸一遍代码
 完整的代码
 ```js
 // Mypromise.js 
