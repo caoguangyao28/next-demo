@@ -9,6 +9,6 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-      <Hero title={"My blogs home is building"} />
+      <Hero title={"总有些事情值得去书写、记忆～"} />
   );
 }

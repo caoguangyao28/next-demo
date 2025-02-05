@@ -25,7 +25,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
  * @description 根据博文路径生成静态路径
  */
 export async function generateStaticParams(): Promise<{ slug: string[] }[]> {
-  const data = await getAllPostIds();
+  const data = await getAllPostIds('posts');
   // console.log(data, '全部博文路径 slug');
   return data.map(({slug}) => ({ slug: Array.isArray(slug) ? slug : [slug] }));
 }

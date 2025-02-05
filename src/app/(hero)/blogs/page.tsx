@@ -52,8 +52,9 @@ export const metadata: Metadata = {
   title: "Blogs list"
 }
 
+// 只是生成技术目录下的
 async function generateStaticProps() {
-  const data = await getSortedPostsData();
+  const data = await getSortedPostsData('posts');
   return {
     props: {
       blogs: data

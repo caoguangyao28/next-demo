@@ -10,9 +10,35 @@ import {rehype} from 'rehype'
 import rehypePrism from 'rehype-prism-plus';
 // 引入缓存对象
 const fileCache: { [key: string]: any } = {};
-let filePathsCache: string[] | PromiseLike<string[]> | null = null;
+// 技术博文缓存变量
+let filePathsCache: { [key: string]: string[] | PromiseLike<string[]> } = {};
+// 技术博客文章目录
 const postsDirectory = path.join(process.cwd(), 'src/posts')
-type PostData = {
+// 读书笔记目录
+const booksDirectory = path.join(process.cwd(), 'src/books')
+// 生活随笔目录
+const lifeDirectory = path.join(process.cwd(), 'src/life')
+
+/**
+ * 根据类型获取对应的目录
+ * @param {string} type
+ * @returns {string}
+ */
+export const getPostsDirectory = (type: string) => {
+  switch (type) {
+    case 'posts':
+      return postsDirectory;
+    case 'books':
+      return booksDirectory;
+    case 'life':
+      return lifeDirectory;
+    default:
+      return postsDirectory;
+  }
+}
+
+
+export type PostData = {
   id: string
   date: string
   title: string
@@ -51,34 +77,33 @@ async function readFilesRecursively(dir: string): Promise<string[]> {
   return filePaths;
 }
 
-async function getAllFilePaths() {
-  if (filePathsCache) {
-    return filePathsCache;
+async function getAllFilePaths(dirPath: string) {
+  if (filePathsCache[dirPath]) {
+    return filePathsCache[dirPath];
   }
-  const filePaths = await readFilesRecursively(postsDirectory);
-  filePathsCache = filePaths;
+  const filePaths = await readFilesRecursively(dirPath);
+  filePathsCache[dirPath] = filePaths;
   return filePaths;
 }
 
-// 引入 allPostsData 缓存对象
+// 引入 allPostsData 缓存对象 对技术博文进行缓存
 const allPostsDataCache: { [key: string]: PostData[] } = {};
 
 /**
- * 获取排序后的帖子数据
+ * 获取排序后的文章数据
  * 该函数异步读取帖子目录下的所有Markdown文件，解析文件内容，提取元数据，并根据日期对帖子进行排序
  *
+ * @param {string} type - 博文类型，可选值为'posts'、'books'或'life'
  * @returns {Promise<PostData[]>} 返回一个Promise，解析为PostData对象的数组
  */
-export async function getSortedPostsData() : Promise<PostData[]> {
-  // 检查缓存中是否已经存在 allPostsData
-  // console.log(allPostsDataCache['allPostsData']);
-  if (allPostsDataCache['allPostsData']) {
-    return allPostsDataCache['allPostsData'];
+export async function getSortedPostsData(type :  string) : Promise<PostData[]> {
+  const dirName = getPostsDirectory(type);
+  if (allPostsDataCache[dirName]) {
+    return allPostsDataCache[dirName];
   }
   // 递归读取帖子目录下的所有文件路径
-  const filePaths = await getAllFilePaths();
-
-  console.log(filePaths, 'filePaths-所有');
+  const filePaths = await getAllFilePaths(dirName);
+  console.log(filePaths, 'dirName 下的 所有');
   // 读取文件夹下所有md文件，包含子文件夹
   const allPostsData: PostData[] = await Promise.all(filePaths.map(async (filePath) => {
     // 从文件名中移除".md"以获取id
@@ -108,14 +133,15 @@ export async function getSortedPostsData() : Promise<PostData[]> {
     }
   });
   // 将结果存储到缓存中
-  allPostsDataCache['allPostsData'] = sortedPostsData;
-
+  allPostsDataCache[dirName] = sortedPostsData;
   return sortedPostsData;
 }
-// 需要考虑嵌套子目录情况 slug 需要注意
-export async function getAllPostIds() {
-  // const fileNames = fs.readdirSync(postsDirectory)
-  const filePaths = await getAllFilePaths();
+
+// 获取所有技术目录下文章id
+export async function getAllPostIds(type: string) {
+  // const fileNames = fs.readdirSync
+  const dirName = getPostsDirectory(type);
+  const filePaths = await getAllFilePaths(dirName);
   const newslugs = filePaths.map(filePath => {
     // console.log()
     return {
@@ -165,4 +191,10 @@ export async function getPostData(id: string) : Promise<PostDataWithContent> {
     contentHtml,
     ...matterResult.data
   } as PostDataWithContent;
+}
+
+// 获取分类下最新的5篇文章
+export async function getLatestPosts(type: string) {
+  const allPosts = await getSortedPostsData(type);
+  return allPosts.slice(0, 5);
 }

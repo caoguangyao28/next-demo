@@ -7,6 +7,6 @@ export const metadata = {
 
 export default function ArticlesList() {
   return (
-    <Hero title={"读书·笔记 等待制作"} />
+    <Hero title={"阅读吧，至少让灵魂去往向往"} />
   )
 }
