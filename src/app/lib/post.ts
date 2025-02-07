@@ -45,6 +45,8 @@ export type PostData = {
   description: string
   dirName: string
   bookimage?: string
+  author?: string
+
 }
 
 /**

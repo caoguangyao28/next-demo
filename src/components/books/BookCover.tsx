@@ -11,7 +11,7 @@ export default function BookCover({imgSrc, desc, author}: {imgSrc: string, desc?
     <div className={'pt-2.5 flex'}>
       <Image width={135} height={200} alt={'图书封面'} src={imgSrc} />
       <section className={'pl-2'}>
-        <h3>作者：{author ?? '[英] 罗伯特·戴博德'}</h3>
+        <h3>作者：{author ?? '网络'}</h3>
         <p className={'text-sm text-xl'}>
           {desc}
         </p>

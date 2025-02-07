@@ -5,7 +5,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'img1.doubanio.com',
+        hostname: '**.doubanio.com',
       },
     ],
   },

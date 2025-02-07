@@ -14,7 +14,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
       <div className={'text-sm'}>
         <span>{postData.date}</span>
       </div>
-      <BookCover desc = {postData.description} imgSrc = {postData.bookimage?? ''} />
+      <BookCover author={postData.author} desc = {postData.description} imgSrc = {postData.bookimage?? ''} />
       <div className={'pt-2.5'} dangerouslySetInnerHTML={{__html: postData.contentHtml}}/>
     </div>
   )

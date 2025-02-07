@@ -28,7 +28,7 @@ export default async function Page() {
           <div className="flex justify-between gap-5 flex-wrap ">
             {groupedBlogs[group].map((blog) => (
               <div key={blog.id} className="bg-white p-4 rounded-lg shadow-md sm:w-full md:w-[43%] hover:shadow-lg transition-shadow duration-300">
-                <BookCover desc = {blog.description} imgSrc={blog.bookimage?? ''} />
+                <BookCover author={blog.author} desc = {blog.description} imgSrc={blog.bookimage?? ''} />
                 <div className={'flex justify-between items-center'}>
                   <h1 className="text-2xl font-bold mb-2 flex items-center overflow-hidden whitespace-nowrap text-ellipsis">
                     <Book className="mr-2" size={24} /> {/* 添加 Book 图标 */}
