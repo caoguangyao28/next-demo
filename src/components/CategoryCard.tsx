@@ -24,10 +24,10 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ title, description, latestP
   // 根据title 找出 linkData 对象数组中 name == title 的对象
   const linkDataItem = linkData.find((item) => item.name === title);
   return (
-    <Card className={'w-[300px] shadow-md dark:bg-gray-800 dark:text-white bg-opacity-65'}>
+    <Card className={'w-[300px] shadow-md  dark:text-white bg-opacity-55'}>
       <CardHeader>
         <CardTitle>
-          <Link className={'text-blue-600'} href={ linkDataItem?.href! }> {title} </Link>
+          <Link href={ linkDataItem?.href! }> {title} </Link>
         </CardTitle>
       </CardHeader>
       <CardContent>

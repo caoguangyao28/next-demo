@@ -3,8 +3,8 @@
  *
  */
 import CategoryCard from "@/components/CategoryCard";
-import { categories } from "@/app/lib/staticData"
-import { getLatestPosts } from "@/app/lib/post";
+import {categories} from "@/app/lib/staticData"
+import {getLatestPosts} from "@/app/lib/post";
 
 interface IProps {
   title: string;
@@ -12,7 +12,7 @@ interface IProps {
 }
 
 
-export default async function Hero({ title }: IProps) {
+export default async function Hero({title}: IProps) {
   // 根据 categories 数据中的 dirType 获取不同分类下 最新的 文章
   // 获取所有分类的最新文章
   const categoriesWithPosts = await Promise.all(
@@ -31,7 +31,8 @@ export default async function Hero({ title }: IProps) {
       </div>
       <div className='flex w-full mx-auto flex-wrap justify-center gap-4 mt-12'>
         {categoriesWithPosts.map((category, index) => (
-          <CategoryCard key={index} dirType={category.dirType === 'posts' ? 'blogs' : category.dirType} title={category.title} description={category.description} latestPosts={category.latestPosts} />
+          <CategoryCard key={index} dirType={category.dirType === 'posts' ? 'blogs' : category.dirType}
+                        title={category.title} description={category.description} latestPosts={category.latestPosts}/>
         ))}
       </div>
     </div>
