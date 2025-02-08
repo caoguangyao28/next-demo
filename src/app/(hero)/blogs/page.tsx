@@ -26,19 +26,19 @@ export default async function Page() {
           <h2 className="text-3xl font-bold mb-4">{group === 'undefined' ? '' : group}</h2>
           <div className="flex justify-between gap-5 flex-wrap ">
             {groupedBlogs[group].map((blog) => (
-              <div key={blog.id} className="bg-white p-4 rounded-lg shadow-md sm:w-5/12 md:w-[30%] hover:shadow-lg transition-shadow duration-300">
+              <div key={blog.id} className="bg-white bg-opacity-70 p-4 rounded-lg shadow-md sm:w-5/12 md:w-[30%] hover:shadow-lg transition-shadow duration-300">
                 <h1 className="text-2xl font-bold mb-2 flex items-center">
                   <Book  size={20} className="mr-2 flex-shrink-0" />
                   <span className="overflow-hidden whitespace-nowrap text-ellipsis">
-                    <Link href={`/blogs/${blog.id}`} className="text-blue-600 hover:text-blue-800">
+                    <Link href={`/blogs/${blog.id}`} className="">
                       {blog.title}
                     </Link>
                   </span>
                 </h1>
-                <p className="text-gray-700 m-0">
+                <p className="m-0">
                   {blog.description}
                 </p>
-                <p className="text-gray-700 mb-0">
+                <p className="mb-0">
                   {blog.date}
                 </p>
               </div>

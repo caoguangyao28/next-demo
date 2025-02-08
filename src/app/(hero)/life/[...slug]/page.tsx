@@ -11,6 +11,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   return (
     <div className={''}>
       <h1 className={'text-2xl'}>{postData.title}</h1>
+      <h3 className="text-slate-900 dark:text-white mt-5 text-base font-medium tracking-tight">Writes Upside-Down</h3>
       <div className={'text-sm'}>
         <span>{postData.date}</span>
       </div>
