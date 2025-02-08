@@ -13,8 +13,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh">
-      <body>
+    <html className={'w-full h-full'} lang="zh">
+      <body className={'w-full h-full overflow-hidden'}>
         {children}
       </body>
     </html>

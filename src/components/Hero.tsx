@@ -25,7 +25,7 @@ export default async function Hero({ title }: IProps) {
   );
 
   return (
-    <div className='h-screen'>
+    <div className='h-full pb-5 overflow-y-auto'>
       <div className='flex justify-center pt-48'>
         <h1 className='text-purple-700 dark:text-white text-6xl font-bold drop-shadow-lg'>{title}</h1>
       </div>
