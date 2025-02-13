@@ -25,7 +25,6 @@ export default function Page() {
             <li>熟悉Electron各类小程序，了解Android、iOS、鸿蒙OS、Flutter等跨端开发相关技术。</li>
             <li>深入了解浏览器渲染、安全等相关运行原理。</li>
             <li>熟悉MySQL、Oracle等应用型数据库。</li>
-            <li>能独立安装、配置和调试开发用到的相关软件。</li>
           </ul>
         </section>
 
