@@ -3,6 +3,8 @@ title: 'HTTP/2 与 HTTP/1.x 对比'
 date: '2021-07-04'
 description: 'HTTP/2 与 HTTP/1.x 对比, 性能提升的核心相关概念, 与 webSocket 简单对比'
 ---
+![思维导图](https://front-end-share-1257122416.cos.ap-shanghai.myqcloud.com/cgy/upic/lQPxN0.jpg)
+
 ## 核心技术概念
 
 1. 二进制分帧

@@ -15,6 +15,13 @@
       "when": 1737518870921,
       "tag": "0001_tense_captain_midlands",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1739521535232,
+      "tag": "0002_flippant_hiroim",
+      "breakpoints": true
     }
   ]
 }

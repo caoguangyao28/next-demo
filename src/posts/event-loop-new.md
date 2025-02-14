@@ -3,6 +3,8 @@ title: "浏览器事件循环机制"
 date: "2025-02-10"
 description: "浏览器事件循环机制,是做 web 应用开发的重要基础。尤其对于前端开发来说，了解浏览器事件循环机制对于提高开发效率和提高代码质量具有 crucial 的意义。"
 ---
+![思维导图](https://front-end-share-1257122416.cos.ap-shanghai.myqcloud.com/cgy/upic/3rwyaV.jpg)
+
 ## 为什么要了解
 
 事件循环机制是 JavaScript 处理异步操作的核心机制，它允许 JavaScript 在执行异步任务时不会阻塞主线程，从而实现非阻塞 I/O 和多任务处理。通过事件循环，JavaScript 可以在等待异步操作完成的同时，继续执行其他任务，如响应用户输入、更新页面等。这使得 Web 应用能够更加流畅地运行，提高了用户体验。

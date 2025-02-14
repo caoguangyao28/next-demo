@@ -4,6 +4,7 @@ date: "2025-02-08"
 description: "参考requestIdleCallback执行机制，以及为了实现优先级可控，模拟实现一个简单版本的调度器，帮助理解react任务调度的基本原理。"
 ---
 
+![思维导图](https://front-end-share-1257122416.cos.ap-shanghai.myqcloud.com/cgy/upic/OIZ4Pe.jpg)
 
 ## 一、简介
 在React中，调度器（Scheduler）是其核心组件之一，负责协调和优化UI更新的时机。本文通过模拟实现一个简化版的调度器分装类——`SimpleScheduler`类，帮助理解任务调度的基本原理。

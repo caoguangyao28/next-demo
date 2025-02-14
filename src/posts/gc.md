@@ -4,6 +4,8 @@ date: '2025-02-13'
 description: '垃圾的产生，为何回收，常见的回收策略有哪些，各自的优缺点，V8 引擎中 GC 优化点有哪些'
 ---
 
+![思维导图](https://front-end-share-1257122416.cos.ap-shanghai.myqcloud.com/cgy/upic/ntOPyY.jpg)
+
 ### 垃圾产生& 为何回收
 
 javascript 中引用数据类型是保存在堆内存中的，然后在栈内存中保存一个对堆内存中实际对象的引用。 基础数据类型（非引用类型）保存在栈内存中
