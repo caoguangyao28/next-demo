@@ -7,6 +7,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: '**.doubanio.com',
       },
+      {
+        protocol: 'https',
+        hostname: '**.myqcloud.com',
+      },
     ],
   },
 };

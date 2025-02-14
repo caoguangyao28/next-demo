@@ -195,7 +195,7 @@ export async function getPostData(id: string, postsDirectory: string) : Promise<
 }
 
 // 获取分类下最新的5篇文章
-export async function getLatestPosts(type: string) {
+export async function getLatestPosts(type: string, limit = 5) {
   const allPosts = await getSortedPostsData(type);
-  return allPosts.slice(0, 5);
+  return allPosts.slice(0, limit);
 }
