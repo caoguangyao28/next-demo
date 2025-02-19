@@ -1,10 +1,8 @@
 ---
 title: "async/await 核心原理"
-data: "2025-02-17"
+date: "2025-02-17"
 description: "async/await 语法糖的工作原理是怎么样的"
 ---
-
-## async/await 的核心原理：
 
 - 基于 Promise：所有异步操作最终转换为 Promise。
 - 生成器控制流程：利用生成器的 yield 暂停和 next() 恢复机制。
