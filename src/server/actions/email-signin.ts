@@ -2,6 +2,7 @@
 
 import {loginSchema} from '@/types/login-schema';
 import {createSafeActionClient} from 'next-safe-action';
+import {db} from "@/server";
 
 const actionClient = createSafeActionClient();
 
@@ -9,6 +10,21 @@ const actionClient = createSafeActionClient();
 export const emailSign = actionClient
   .schema(loginSchema)
   .action(async ({parsedInput: {email, password, code}}) => {
-    console.log('emailSignin', email, password, code)
-    return {email, password, code}
+    const existingUser = await db.query.users.findFirst({
+      where: (users, {eq}) => eq(users.email, email),
+    })
+
+    if (existingUser?.email !== email) {
+      return {
+        error: "email not found"
+      }
+    }
+
+    if(!existingUser.emailVerified) {
+      return {
+        error: "email not verified"
+      }
+    }
+
+    return {success: email, email, password, code}
   });

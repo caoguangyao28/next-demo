@@ -11,6 +11,7 @@ import Link from "next/link";
 import { emailSign } from "@/server/actions/email-signin";
 import { useAction } from "next-safe-action/hooks";
 import {cn} from "@/lib/utils";
+import {useState} from "react";
 export const LoginForm = () => {
   const form = useForm({ // muset be 'use client'
     resolver: zodResolver(loginSchema),
@@ -18,8 +19,17 @@ export const LoginForm = () => {
       email: '',
       password: ''
     }
+  });
+
+  const [error, setError] = useState('')
+  const { execute, status, result } = useAction(emailSign, {
+    onError: (error) => {
+      console.log(error)
+    },
+    onSuccess: (data) => {
+      console.log(data)
+    }
   })
-  const { execute, status, result } = useAction(emailSign)
   const onSubmit = async (values: z.infer<typeof loginSchema>) => {
     await execute(values);
     console.log(result)
