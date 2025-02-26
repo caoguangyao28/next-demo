@@ -6,4 +6,11 @@
 * [Next.js](https://nextjs.org/)
 * 前端 全栈
 
+### 本地启动数据管理
+```bash
+npx drizzle-kit studio
+```
+启动后访问：https://local.drizzle.studio
+
+
 
