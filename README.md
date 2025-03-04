@@ -13,9 +13,6 @@ npx drizzle-kit studio
 启动后访问：https://local.drizzle.studio
 
 
-
-
-
 # 项目结构
 ```plaintext
 ├── src/
