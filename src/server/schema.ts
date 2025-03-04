@@ -1,17 +1,20 @@
 import {boolean, integer, pgTable, primaryKey, text, timestamp} from "drizzle-orm/pg-core";
 import type { AdapterAccountType } from "next-auth/adapters"
 import { pgEnum } from "drizzle-orm/pg-core/columns/enum";
+import { createId } from '@paralleldrive/cuid2'
 
 export const RoleEnum =  pgEnum("roles", ["admin", "user"])
 
 export const users = pgTable("user", {
   id: text("id")
+    .notNull()
     .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
+    .$defaultFn(() => createId()),
   name: text("name"),
-  email: text("email").unique(),
+  email: text("email").notNull(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
+  password: text("password"),
   twoFactorEnabled: boolean("twoFactorEnabled").default(false),
   role: RoleEnum("roles").default("user"),
 })
@@ -63,6 +66,22 @@ export const authenticators = pgTable(
       }),
     },
   ]
+)
+
+export const emailTokens = pgTable(
+  "email_tokens",
+  {
+    id: text("id")
+      .notNull()
+      .$defaultFn(() => createId()),
+    token: text("token").notNull(),
+    expires: timestamp("expires", { mode: "date" }).notNull(),
+    email: text("email").notNull(),
+  },
+  // 组合索引 组合 key
+  (vt) => ({
+    compoundKey: primaryKey({ columns: [vt.id, vt.token] }),
+  })
 )
 
 // 创建一个类型，用于表示插入的用户数据
